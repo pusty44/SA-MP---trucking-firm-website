@@ -1,0 +1,48 @@
+<!-- Start Header Area -->
+<header class="header {% if siteType is defined %}header-v2 fixed-top{% endif %}">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-2 col-md-3 col-4">
+                <!-- Start Logo -->
+                <div class="logo" data-animate="fadeInUp" data-delay=".2">
+                    <a href="{{ path('index') }}">
+                        {% if siteType is defined %}<img src="/assets/img/logo-white.png" data-rjs="2" alt="Site logo">{% endif %}
+                        <img src="/assets/img/logo.png" data-rjs="2" alt="Site logo">
+                    </a>
+                </div>
+                <!-- End Logo -->
+            </div>
+            <div class="col-lg-8 col-md-6 col-4">
+                <nav class="text-right">
+                    <!-- Start Header Menu -->
+                    <div class="main-menu" data-animate="fadeInUp" data-delay=".2">
+                        <ul>
+                            <li><a href="{{ path('index') }}">Strona Główna</a></li>
+                            <li><a href="{{ path('page', {seoUrl: 'about'}) }}">O nas</a></li>
+                            <li><a href="{{ path('page', {seoUrl: 'rules'}) }}">Regulamin</a></li>
+                            <li><a href="{{ path('drivers') }}">Kierowcy</a></li>
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                <li><a href="{{ path('driver') }}" style="text-transform: none;">Witaj, <strong>{{ app.user.username }}</strong></a></li>
+                                <li><a href="/logout"><i class="fa fa-sign-out"></i></a></li>
+                            {% else %}
+                                <li><a href="{{ path('page', {seoUrl: 'contact'}) }}">Kontakt</a></li>
+                                <li><a href="{{ path('login') }}"><i class="fa fa-sign-in"></i></a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <!-- End Header Menu -->
+                </nav>
+            </div>
+            <div class="col-lg-2 col-md-3 col-4 text-right">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <a data-animate="fadeInUp" data-delay=".2" href="{{ path('driver') }}" class="header-btn btn"><i class="fa fa-user" aria-hidden="true"></i><span>PANEL KIEROWCY</span></a>
+                {% else %}
+                <!-- Start Header Button -->
+                <a data-animate="fadeInUp" data-delay=".2" href="{{ path('recruit') }}" class="header-btn btn"><i class="fa fa-user" aria-hidden="true"></i><span>REKRUTACJA</span></a>
+                <!-- End Header Button -->
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</header>
+<!-- End Header Area -->

@@ -1,0 +1,269 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ title }}{% endblock %}
+{% block stylesheets %}
+    <style>
+        .media {
+            background-position: center;
+            background-size: cover;
+            height: 100%;
+            position: absolute;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        figure {
+            height: 370px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        figure:hover .media {
+            -webkit-transform: scale(1.25);
+            transform: scale(1.25);
+        }
+
+        figcaption {
+            color: #252830;
+            height: calc(100% - 30px);
+            margin: 15px;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 250px;
+        }
+
+        .body {
+            background-color: white;
+            bottom: 0;
+            padding: 15px;
+            position: absolute;
+            width: 100%;
+            color: #999999;
+        }
+
+        .body a {
+            color: #999999;
+        }
+
+        .buttons {
+            position: relative;
+            text-align: right;
+            padding-right: 5%;
+            padding-top: 1%;
+            color: #ffffff;
+        }
+
+        .buttons a {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 991px) {
+            .buttons {
+                display: none;
+            }
+        }
+
+        svg {
+            height: inherit;
+            width: 100%;
+        }
+
+        svg text {
+            text-anchor: middle;
+        }
+
+        svg #alpha {
+            fill: white;
+        }
+
+        svg .title {
+            font-size: 28px;
+            font-family: "Montserrat";
+        }
+
+        svg #base {
+            fill: white;
+            -webkit-mask: url(#mask);
+            mask: url(#mask);
+        }
+
+
+        .timeline {
+            display: block;
+            position: relative;
+            width: 100%;
+        }
+
+        .timeline .tile {
+            margin: 0 1rem 0 2rem;
+        }
+
+        .timeline .timeline-item:nth-child(odd) {
+            position: relative;
+            max-width: 50%;
+            text-align: right;
+        }
+
+        .timeline .timeline-item:nth-child(odd) .timeline-content {
+            padding: 2px 0.8rem 2px 0;
+        }
+
+        .timeline .timeline-item:nth-child(odd) .timeline-icon {
+            position: relative;
+        }
+
+        .timeline .timeline-item:nth-child(odd) .timeline-icon::after {
+            border: 0.1rem solid #34435e !important;
+            border-radius: 50%;
+            content: "";
+            display: block;
+            height: 0.4rem;
+            right: 0.4rem;
+            position: absolute;
+            top: 0.4rem;
+            width: 0.4rem;
+        }
+
+        .timeline .timeline-item:nth-child(odd) .timeline-icon::before {
+            display: none;
+        }
+
+        .timeline .timeline-item:nth-child(odd)::after {
+            background: #91a898 !important;
+            content: "";
+            height: 80%;
+            right: 9px;
+            position: absolute;
+            top: 1.2rem;
+            width: 2px;
+        }
+
+        .timeline .timeline-item:nth-child(odd)::before {
+            display: none;
+        }
+
+        .timeline .timeline-item:nth-child(odd) .tile-action {
+            position: absolute;
+            float: left;
+        }
+
+        .timeline .timeline-item:nth-child(even) {
+            position: relative;
+            left: calc(50% - 1.2rem);
+            text-align: left;
+            max-width: 50%;
+        }
+
+        .timeline .timeline-item:nth-child(even) .timeline-icon {
+            position: relative;
+        }
+
+        .timeline .timeline-item:nth-child(even) .timeline-icon::before {
+            border: 0.1rem solid #34435e !important;
+            border-radius: 50%;
+            content: "";
+            display: block;
+            height: 0.4rem;
+            right: -0.8rem;
+            position: absolute;
+            top: 0.4rem;
+            width: 0.4rem;
+        }
+
+        .timeline .timeline-item:nth-child(even)::before {
+            background: #91a898 !important;
+            content: "";
+            height: 90%;
+            left: 9px;
+            position: absolute;
+            top: 1.2rem;
+            width: 2px;
+        }
+
+        .tile-subtitle {
+            color: #0b0b0b;
+        }
+
+    </style>
+{% endblock %}
+{% block body %}
+    {% include 'common/pageHeader.html.twig' %}
+    <div class="container" style="margin-top: 5%;">
+        <div class="col-lg-12 col-lg-offset-0 col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0 col-xs-12">
+            <figure>
+                <div class="media" style="background-image:url({{ recruit.coverPhoto }});"></div>
+                <div class="buttons">
+                    <a data-animate="fadeInUp" data-delay=".2" href="{{ path('newLoad') }}"
+                       class="header-btn btn animated fadeInUp"
+                       style="animation-duration: 0.6s; animation-delay: 0.2s; font-size: 11px;"><span>NOWY ŁADUNEK</span></a>
+                    <a data-animate="fadeInUp" data-delay=".2" href="{{ path('newTacho') }}"
+                       class="header-btn btn animated fadeInUp"
+                       style="animation-duration: 0.6s; animation-delay: 0.2s; font-size: 11px;"><span>NOWY TACHOGRAF</span></a>
+                    <a data-animate="fadeInUp" data-delay=".2" href="/register/{{ user.activationHash }}"
+                       class="header-btn btn animated fadeInUp"
+                       style="animation-duration: 0.6s; animation-delay: 0.2s; font-size: 11px;"><span>ZMIEŃ HASŁO</span></a>
+                </div>
+                <figcaption>
+                    <svg viewBox="0 0 200 200" version="1.1" preserveAspectRatio="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <mask id="mask" x="0" y="0" width="100%" height="100%">
+                                <rect id="alpha" x="0" y="0" width="100%" height="100%"></rect>
+                                <text class="title" dx="50%" dy="2.5em"
+                                      style="text-transform: uppercase">{{ recruit.serverNick }}</text>
+                            </mask>
+                        </defs>
+                        <rect id="base" x="0" y="0" width="100%" height="100%"></rect>
+                    </svg>
+                    <div class="body">
+                        <p style="font-size:12px;">
+                            <strong>Email: </strong>{{ user.email }}<br/>
+                            <strong>Steam: </strong><a href="{{ recruit.steamLink }}">Przejdź do profilu</a><br/>
+                            <strong>Profil: </strong><a href="{{ recruit.profileLink }}">Przejdź do profilu</a><br/>
+                            <strong>Staż w grze: </strong>{{ recruit.practice }}<br/>
+                            <strong>Wiek: </strong>{{ recruit.age }}
+                        </p>
+                    </div>
+
+                </figcaption>
+            </figure>
+        </div>
+    </div>
+
+    <div class="container" style="margin-top:5%; margin-bottom: 5%;">
+        <div class="columns">
+            <div class="column col-12 text-center">
+                <p class="h1">Dane z tachografu</p>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column col-12">
+                <div class="timeline">
+                    {% for tacho in tachograph %}
+                        <div class="timeline-item" id="tachograph-{{ loop.index }}">
+                            <div class="timeline-left"><a class="timeline-icon" href="#tachograph-{{ loop.index }}"></a>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="tile">
+                                    <div class="tile-content">
+                                        <p class="tile-subtitle">{{ tacho.addDate | date('d.m.Y H:i') }}</p>
+                                        <p class="tile-title">
+                                            <strong>Licznik początkowy: </strong>{{ tacho.startKm }} km<br/>
+                                            <strong>Licznik kończowy: </strong>{{ tacho.endKm }} km<br/>
+                                            {% if tacho.damage %}<strong>Uszkodzenia: </strong><br/>{{ tacho.damage }}
+                                                <br/>{% endif %}
+                                            <strong>Tankowanie: </strong>{% if tacho.fuel %}TAK{% else %}NIE{% endif %}<br />
+                                            {% if tacho.load %}<strong>Ładunek: </strong>{{ tacho.load.title }}{% endif %}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

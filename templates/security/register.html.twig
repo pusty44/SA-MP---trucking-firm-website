@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+    {% include 'common/pageHeader.html.twig' %}
+    <!-- Start Page Welcome Area -->
+    <section class="ptb-130">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Start Page Welcome Content -->
+                <div class="col-md-6 col-12">
+                    <div class="page-welcome-content">
+                        <h3 data-animate="fadeInUp" data-delay=".1">HIGHWAYLIFE</h3>
+                        <h1 data-animate="fadeInUp" data-delay=".2">Strefa Kierowcy</h1>
+                        <p data-animate="fadeInUp" data-delay=".3">Zarejestruj się, aby uzyskać dostęp do zapisu tachografu, przejechanych tras i zarobków.</p>
+
+                        <!-- End Social Icons -->
+                    </div>
+                </div>
+                <!-- End Page Welcome Content -->
+
+                <!-- Start Contact Form -->
+                <div class="col-md-6 col-12">
+                    <div class="contact-form bg-light">
+                        <div class="form-response"></div>
+                        <form method="post" action="{{ path('register', {hash: activation}) }}" class="parsley-validate">
+                            <div class="input-wrap">
+                                <label>Twój login to:</label>
+                                {{ form_widget(form.username, { 'attr': {'class': 'form-control'} }) }}
+                                <span class="highlight"></span>
+                            </div>
+                            <div class="input-wrap">
+                                <label>Adres mailowy do korespondencji:</label>
+                                {{ form_widget(form.email, { 'attr': {'class': 'form-control'} }) }}
+                                <span class="highlight"></span>
+                            </div>
+                            <h4 style="border-top: #44ce78 2px solid; border-bottom: #44ce78 2px solid; margin: 5px 0; padding: 5px 0; width: 100%; text-align: center;">USTAW HASŁO DLA KONTA</h4>
+                            <div class="input-wrap">
+                                <label>Hasło:</label>
+                                {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control'} }) }}
+                                <input type="hidden" name="_target_path" value="/" />
+                                <span class="highlight"></span>
+                            </div>
+                            <div class="input-wrap">
+                                <label>Powtórz hasło:</label>
+                                {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control'} }) }}
+                                <span class="highlight"></span>
+                                {{ form_row(form._token) }}
+                            </div>
+                            <button class="btn" data-animate="fadeInUp" data-delay=".3" type="submit">Zarejestruj!</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- End Contact Form -->
+            </div>
+        </div>
+    </section>
+    <!-- End Page Welcome Area -->
+{% endblock %}

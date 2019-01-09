@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+    {% include 'common/pageHeader.html.twig' %}
+    <!-- Start Page Welcome Area -->
+    <section class="ptb-130">
+        <div class="container">
+            {{ page.content | raw }}
+        </div>
+    </section>
+{% endblock %}

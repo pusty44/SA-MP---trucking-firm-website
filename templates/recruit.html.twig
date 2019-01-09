@@ -1,0 +1,128 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+    {% include 'common/pageHeader.html.twig' %}
+    <!-- Start Page Welcome Area -->
+    <section class="ptb-130">
+        <div class="container">
+            {% if error %}
+                <!-- Start Offer Area -->
+                <div class="offer-wrapper text-center" data-animate="fadeInUp" data-delay=".1">
+                    <div class="offer-text">
+                        <h2  data-animate="fadeInUp" data-delay=".3">Sukces!</h2>
+                        <p data-animate="fadeInUp" data-delay=".5" >Twoje podanie rekrutacyjne zostało zapisane, zostaniesz poinformowany mailowo o jego rozpatrzeniu!</p>
+                    </div>
+                </div>
+            {% else %}
+            <form method="post" action="{{ path('recruit') }}" class="parsley-validate" enctype="multipart/form-data">
+                <div class="row" style="margin-bottom: 50px;">
+                    <div class="col-sm-6">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-lg-8 col-12">
+                                <div class="subscribe-area">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-12 subscribe-text" data-animate="fadeInUp" data-delay=".3">
+                                            <h4>Tożsamość</h4>
+                                            <p>Daj nam się zidentyfikować :)</p><br />
+                                            <p>Na adres e-mail, który podasz w polu obok zostanie przesłana informacja na temat statusu Twojego podania rekrutacyjnego</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-wrap">
+                            <label>Nick na serwerze</label>
+                            {{ form_widget(form.serverNick) }}
+                            <span class="highlight"></span>
+                        </div>
+                        <div class="input-wrap">
+                            <label>Nick na forum</label>
+                            {{ form_widget(form.forumNick) }}
+                            <span class="highlight"></span>
+                        </div>
+                        <div class="input-wrap">
+                            <label>Adres e-mail</label>
+                            {{ form_widget(form.email) }}
+                            <span class="highlight"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 50px;">
+                    <div class="col-sm-6">
+                        <div class="input-wrap">
+                            <lable>Link do steam</lable>
+                            {{ form_widget(form.steamLink) }}
+                            <span class="highlight"></span>
+                        </div>
+                        <div class="input-wrap">
+                            <label>Link do profilu gracza</label>
+                            {{ form_widget(form.profileLink) }}
+                            <span class="highlight"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-lg-8 col-12">
+                                <div class="subscribe-area">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-12 subscribe-text" data-animate="fadeInUp" data-delay=".3">
+                                            <h4>Społeczność</h4>
+                                            <p>Pokaż nam, że możesz być członkiem większej ekipy!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 50px;">
+                    <div class="col-sm-6">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-lg-8 col-12">
+                                <div class="subscribe-area">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-12 subscribe-text" data-animate="fadeInUp" data-delay=".3">
+                                            <h4>O Tobie</h4>
+                                            <p>Chcemy Cię lepiej poznać, dlatego pokaż nam swój avatar i zdjecie w tle!</p><br />
+                                            <p>Avatar oraz zdjęcie w tle zostanie wykorzystane do pokazania Twojego profilu kierowcy.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="input-wrap">
+                            <label>Staż w grze</label>
+                            {{ form_widget(form.practice) }}
+                            <span class="highlight"></span>
+                        </div>
+                        <div class="input-wrap">
+                            <label>Wiek</label>
+                            {{ form_widget(form.age) }}
+                            <span class="highlight"></span>
+                        </div>
+                        <div class="input-wrap">
+                            <label>Avatar</label>
+                            {{ form_widget(form.avatar) }}
+                            <span class="highlight"></span>
+                        </div>
+                        <div class="input-wrap">
+                            <label>Zdjęcie w tle</label>
+                            {{ form_widget(form.coverPhoto) }}
+                            <span class="highlight"></span>
+                        </div>
+                    </div>
+
+                </div>
+                {{ form_row(form._token) }}
+                <div class="text-center">
+                    <button class="btn" data-animate="fadeInUp" data-delay=".3">Zapisz się!</button>
+                </div>
+            </form>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

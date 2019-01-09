@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Autostrada życiem!{% endblock %} :: HighwayLife.pl</title>
+        <!-- Meta-Data -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        {% include 'common/stylesheets.html.twig' %}
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        <!-- Start Preloader -->
+        <div class="preloader">
+            <div class="spinner">
+                <div class="double-bounce1"></div>
+                <div class="double-bounce2"></div>
+            </div>
+        </div>
+        <!-- End Preloader -->
+        {% include 'common/header.html.twig' %}
+        {% block body %}{% endblock %}
+        {% include 'common/footer.html.twig' %}
+        {% include 'common/scripts.html.twig' %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
