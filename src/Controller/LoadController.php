@@ -101,12 +101,28 @@ class LoadController extends AbstractController
             $data = $form->getData();
             /** @var Load $load */
             $load = $data['load'];
-            $load->setUser($user);
-            $load->setStartDate(new \DateTime());
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($load);
-            $em->flush();
-            $error = true;
+            if($load != NULL){
+                $load->setUser([$user]);
+                $load->setAvailable($load->getAvailable()-1);
+                if($load->getAvailable() == 0){
+                    $load->setEnded(1);
+                }
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($load);
+                $em->flush();
+                $error = true;
+            } else {
+                $load = new Load();
+                $load->setUser([$user]);
+                $load->setTitle($data['title']);
+                $load->setAvailable(0);
+                $load->setEnded(1);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($load);
+                $em->flush();
+                $error = true;
+            }
+
         }
         return $this->render('newLoad.html.twig', array(
             'title' => 'Nowy ładunek',

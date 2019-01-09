@@ -9,6 +9,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @ORM\Table(name="hw_loads")
  * @ORM\Entity()
@@ -23,8 +24,16 @@ class Load
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="user", referencedColumnName="username", nullable=true)
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="id")
+     * @ORM\JoinTable(
+     *  name="hw_userLoad",
+     *  joinColumns={
+     *      @ORM\JoinColumn(name="load_id", referencedColumnName="id")
+     *  },
+     *  inverseJoinColumns={
+     *      @ORM\JoinColumn(name="user_id", referencedColumnName="username")
+     *  }
+     * )
      */
     private $user;
 
@@ -39,15 +48,11 @@ class Load
      * @ORM\Column(type="datetime")
      */
     private $addDate;
-    /**
-     * @var \DateTime
-     * @ORM\Column(type="datetime",nullable=true,options={"default": NULL})
-     */
-    private $startDate;
+
 
     /**
-     * @var boolean
-     * @ORM\Column(type="boolean",options={"default" : true})
+     * @var integer
+     * @ORM\Column(type="integer",options={"default" : 1})
      */
     private $available;
 
@@ -63,7 +68,6 @@ class Load
     public function __construct()
     {
         $this->addDate = new \DateTime();
-        $this->user = null;
         $this->ended = false;
     }
 
@@ -100,6 +104,24 @@ class Load
     }
 
     /**
+     * @return int
+     */
+    public function getAvailable(): int
+    {
+        return $this->available;
+    }
+
+    /**
+     * @param int $available
+     */
+    public function setAvailable(int $available): void
+    {
+        $this->available = $available;
+    }
+
+
+
+    /**
      * @return string
      */
     public function getTitle(): string
@@ -129,38 +151,6 @@ class Load
     public function setAddDate(string $addDate): void
     {
         $this->addDate = $addDate;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isAvailable(): bool
-    {
-        return $this->available;
-    }
-
-    /**
-     * @param bool $available
-     */
-    public function setAvailable(bool $available): void
-    {
-        $this->available = $available;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getStartDate(): \DateTime
-    {
-        return $this->startDate;
-    }
-
-    /**
-     * @param \DateTime $startDate
-     */
-    public function setStartDate(\DateTime $startDate): void
-    {
-        $this->startDate = $startDate;
     }
 
     /**

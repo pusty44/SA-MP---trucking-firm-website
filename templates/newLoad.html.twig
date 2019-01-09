@@ -33,13 +33,19 @@
                         <div class="contact-form bg-light">
                             <div class="form-response"></div>
                             <form method="post" action="{{ path('newLoad') }}" class="parsley-validate">
-                                <div class="input-wrap">
+                                <h2>Ładunki kontraktowe</h2>
+                                <div class="input-wrap" style="margin-bottom: 10px;">
                                     <label>Wybierz ładunek z listy</label>
                                     {{ form_widget(form.load) }}
                                     <span class="highlight"></span>
                                 </div>
+                                <h2>Ładunki własne</h2>
+                                <div class="input-wrap" style="margin-bottom: 10px;">
+                                    {{ form_widget(form.title) }}
+                                    <span class="highlight"></span>
+                                </div>
                                 {{ form_row(form._token) }}
-                                <button class="btn" data-animate="fadeInUp" data-delay=".3" type="submit">Dodaj</button>
+                                <button class="btn" data-animate="fadeInUp" data-delay=".3" type="submit">Wybierz</button>
                             </form>
                         </div>
                     </div>
