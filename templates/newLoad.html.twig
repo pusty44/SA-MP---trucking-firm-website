@@ -39,13 +39,31 @@
                                     {{ form_widget(form.load) }}
                                     <span class="highlight"></span>
                                 </div>
-                                <h2>Ładunki własne</h2>
-                                <div class="input-wrap" style="margin-bottom: 10px;">
-                                    {{ form_widget(form.title) }}
-                                    <span class="highlight"></span>
-                                </div>
+
+
                                 {{ form_row(form._token) }}
                                 <button class="btn" data-animate="fadeInUp" data-delay=".3" type="submit">Wybierz</button>
+                            </form>
+                            <h2>Ładunki własne</h2>
+                            <form method="post" action="{{ path('newLoad') }}" class="parsley-validate">
+                                <div class="input-wrap" style="margin-bottom: 10px;">
+                                    <label>Nazwa ładunku</label>
+                                    {{ form_widget(load1.title) }}
+                                    <span class="highlight"></span>
+                                </div>
+                                <div class="input-wrap" style="margin-bottom: 10px;">
+                                    <label>Skąd zabrano ładunek</label>
+                                    {{ form_widget(load1.locationStart) }}
+                                    <span class="highlight"></span>
+                                </div>
+                                <div class="input-wrap" style="margin-bottom: 10px;">
+                                    <label>Dokąd dostarczono ładunek</label>
+                                    {{ form_widget(load1.locationEnd) }}
+                                    <span class="highlight"></span>
+                                </div>
+
+                                {{ form_row(load1._token) }}
+                                <button class="btn" data-animate="fadeInUp" data-delay=".3" type="submit">Dodaj</button>
                             </form>
                         </div>
                     </div>

@@ -71,7 +71,7 @@ class SecurityController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
             /** @var Recruit $recruit */
-            $recruit = $this->getDoctrine()->getRepository(Recruit::class)->findOneBy(['activationHash' => $hash]);
+            $recruit = $this->getDoctrine()->getRepository(Recruit::class)->findOneBy(['serverNick' => $user->getUsername()]);
             $recruit->setStatus(4);
             $recruit->setActivationHash($hash);
             $entityManager->persist($recruit);

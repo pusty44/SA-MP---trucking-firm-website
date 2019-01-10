@@ -26,7 +26,13 @@ class Plate
      * @var string
      * @ORM\Column(type="string")
      */
-    private $title;
+    private $start;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string")
+     */
+    private $end;
 
     /**
      * @ORM\ManyToOne(targetEntity="User")
@@ -62,18 +68,35 @@ class Plate
     /**
      * @return string
      */
-    public function getTitle(): string
+    public function getStart(): string
     {
-        return $this->title;
+        return $this->start;
     }
 
     /**
-     * @param string $title
+     * @param string $start
      */
-    public function setTitle(string $title): void
+    public function setStart(string $start): void
     {
-        $this->title = $title;
+        $this->start = $start;
     }
+
+    /**
+     * @return string
+     */
+    public function getEnd(): string
+    {
+        return $this->end;
+    }
+
+    /**
+     * @param string $end
+     */
+    public function setEnd(string $end): void
+    {
+        $this->end = $end;
+    }
+
 
     /**
      * @return mixed

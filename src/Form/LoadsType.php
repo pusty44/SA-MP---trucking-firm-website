@@ -10,6 +10,7 @@ namespace App\Form;
 
 
 use App\Entity\Load;
+use App\Entity\Locations;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -22,16 +23,6 @@ class LoadsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class, [
-                'label' => 'Nazwa firmy - zlecenie',
-                'required' => true,
-                'attr' => [
-                    'class' => 'form-control recruit-form',
-                    'placeholder' => 'Nazwa firmy - zlecenie',
-                    'data-animate' => "fadeInUp",
-                    'data-delay' => ".1"
-                ],
-            ])
             ->add('load', EntityType::class, [
                 'class' => Load::class,
                 'query_builder' => function (EntityRepository $er) {
@@ -54,8 +45,8 @@ class LoadsType extends AbstractType
                 else $end = 'pozostało: '.$load->getAvailable().' ładunków';
                     return $load->getTitle().' '.$end;
                 }
-            ])
-        ;
+            ]);
+
     }
 
 }

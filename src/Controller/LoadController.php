@@ -13,6 +13,7 @@ use App\Entity\Load;
 use App\Entity\Recruit;
 use App\Entity\Tachograph;
 use App\Form\LoadsType;
+use App\Form\NewLoadType;
 use App\Form\TachoType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -61,11 +62,9 @@ class LoadController extends AbstractController
         $error = false;
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            dump($data);
             /** @var Load $load */
             $load = $data->getLoad();
             $tacho->setUser($user);
-            dump($tacho);
             $em = $this->getDoctrine()->getManager();
             $em->persist($tacho);
             $em->flush();
@@ -95,38 +94,44 @@ class LoadController extends AbstractController
     {
         $user = $this->getUser();
         $form = $this->createForm(LoadsType::class);
+        $load1 = $this->createForm(NewLoadType::class);
+        $load1->handleRequest($request);
         $form->handleRequest($request);
         $error = false;
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             /** @var Load $load */
             $load = $data['load'];
-            if($load != NULL){
+            if($load != NULL) {
                 $load->setUser([$user]);
-                $load->setAvailable($load->getAvailable()-1);
-                if($load->getAvailable() == 0){
+                $load->setAvailable($load->getAvailable() - 1);
+                if ($load->getAvailable() == 0) {
                     $load->setEnded(1);
                 }
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($load);
                 $em->flush();
                 $error = true;
-            } else {
-                $load = new Load();
-                $load->setUser([$user]);
-                $load->setTitle($data['title']);
-                $load->setAvailable(0);
-                $load->setEnded(1);
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($load);
-                $em->flush();
-                $error = true;
             }
-
+        }
+        if($load1->isSubmitted() && $load1->isValid()){
+            $data = $load1->getData();
+            $load = new Load();
+            $load->setUser([$user]);
+            $load->setAvailable(0);
+            $load->setEnded(1);
+            $load->setLocationStart($data['locationStart']);
+            $load->setLocationEnd($data['locationEnd']);
+            $load->setTitle($data['title'].' z: '.$data['locationStart']->getTitle().' do: '.$data['locationEnd']->getTitle());
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($load);
+            $em->flush();
+            $error = true;
         }
         return $this->render('newLoad.html.twig', array(
             'title' => 'Nowy ładunek',
             'form' => $form->createView(),
+            'load1' => $load1->createView(),
             'error' => $error
 
         ));

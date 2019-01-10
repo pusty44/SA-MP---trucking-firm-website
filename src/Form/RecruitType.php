@@ -53,21 +53,6 @@ class RecruitType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('steamLink', TextType::class, [
-                'label' => 'Link do profilu steam',
-                'required' => true,
-                'attr' => [
-                    'class' => 'form-control recruit-form',
-                    'placeholder' => 'Wprowadź link do profilu steam',
-                    'data-animate' => "fadeInUp",
-                    'data-delay' => ".1"
-                ],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Musisz wpisać link do profilu steam',
-                    ]),
-                ],
-            ])
             ->add('email', EmailType::class, [
                 'label' => 'Adres e-mail',
                 'required' => true,

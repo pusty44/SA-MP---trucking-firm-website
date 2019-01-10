@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+    {% include 'common/pageHeader.html.twig' %}
+    <!-- Start Page Welcome Area -->
+    <section class="ptb-130">
+        <div class="container">
+            <div class="row">
+                {% for user in returns %}
+                    <div class="col-sm-6 col-lg-4 userPanel">
+                        <div class="block block-link-hover2">
+                            <div class="block-header" style="padding:30px 20px;">
+                                <ul class="block-options">
+                                    <li>
+                                        {% if user.plate %}
+                                        <div style="width:96px; height:26px; margin-top:4px; float:left; background-image:url('/assets/img/tabrej.png'); background-size:100%; background-repeat:no-repeat;">
+                                            <div style="width:96px; height:25px; line-height:25px; padding:0 0 0 7px; float:left; font-family:'arklas-Tablica-samochodowa','arklatrs'; font-size:17px; color:black; text-align:center;">
+                                                {{ user.plate.start }}<img src="assets/img/naklejka.png" alt="naklejka" style="padding:0 2px;height:7px;">{{ user.plate.end }}
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                    </li>
+                                </ul>
+                                <span class="block-title font-w400" style="font-size:13pt; text-transform:none;">
+                                    <small><a href="{{ user.profile }}" target="_blank"><i class="fa fa-user"></i></a>&nbsp;|&nbsp;
+                                    {% if user.rank %}<span style="color: {% if user.rank == 'Prezes' %}#ff0000{% elseif user.rank == 'Zastępca' %}#ff8888{% else %}#9e8484{% endif %}"><i class="fa fa-star"></i> {{ user.rank }}</span>&nbsp;&nbsp;{% endif %}
+                                        </small>
+                                    {{ user.user }}</span>
+                            </div>
+                            <div class="bg-image" style="background-image: url({{ user.cover }}); background-size: cover;">
+                                <div class="block-content block-content-full text-center bg-black-op">
+                                    <img src="{{ user.avatar }}" class="img-avatar img-avatar96 bg-image" style="background-image:url({{ user.avatar }});background-position:center;margin:5px;-webkit-box-shadow:0 0 0 5px rgba(255,255,255,0.3);box-shadow:0 0 0 5px rgba(255,255,255,0.3)" alt="avatar">							</div>
+                            </div>
+                            <div class="block-content border-t">
+                                <div class="row items-push text-center">
+                                    {% if user.truck %}
+                                    <div class="col-sm-4" style="padding:20px 5px;">
+                                        <div class="push-5"><img src="/assets/img/trucks/{{ user.truck }}.png" class="img-fluid" /></div>
+                                        <div class="h5 font-w300 text-muted">&nbsp;<br />
+                                        <small>{{ user.truck }}</small></div>
+                                    </div>
+                                    {% endif %}
+                                    <div class="col-sm-{% if user.truck %}4{% else %}6{% endif %} border-r border-l" style="padding:20px 5px;">
+                                        <div class="push-5"><i class="fa fa-globe fa-2x"></i></div>
+                                        <div class="h5 font-w300 text-muted">{{ user.loads }} <br /><small>dostarczonych ładunków</small></div>
+                                    </div>
+                                    <div class="col-sm-{% if user.truck %}4{% else %}6{% endif %}" style="padding:20px 5px;">
+                                        <div class="push-5"><i class="fa fa-road fa-2x"></i></div>
+                                        <div class="h5 font-w300 text-muted">{{ user.km }} <br /><small>kilometrów</small></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </section>
+{% endblock %}

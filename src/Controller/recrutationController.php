@@ -127,6 +127,7 @@ class recrutationController extends AbstractController
                     $user->setEmail($recrut->getEmail());
                     $user->setUsername($recrut->getServerNick());
                     $user->setPassword('tsno');
+					$user->setSortOrder(10);
                     $user->setActivationHash($recrut->getActivationHash());
                     $em->persist($user);
                     $em->flush();

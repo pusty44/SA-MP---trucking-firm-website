@@ -11,7 +11,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Table(name="hw_tachograph")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\TachoRepository")
  */
 class Tachograph
 {
@@ -60,9 +60,9 @@ class Tachograph
 
     /**
      * @ORM\ManyToOne(targetEntity="Load")
-     * @ORM\JoinColumn(name="load", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="loadId", referencedColumnName="id", nullable=true)
      */
-    private $load;
+    private $loadId;
 
     /**
      * Tachograph constructor.
@@ -73,7 +73,7 @@ class Tachograph
         $this->startKm = 0;
         $this->endKm = 0;
         $this->fuel = false;
-        $this->load = null;
+        $this->loadId = null;
     }
 
     /**
@@ -193,7 +193,7 @@ class Tachograph
      */
     public function getLoad()
     {
-        return $this->load;
+        return $this->loadId;
     }
 
     /**
@@ -201,7 +201,7 @@ class Tachograph
      */
     public function setLoad($load): void
     {
-        $this->load = $load;
+        $this->loadId = $load;
     }
 
 

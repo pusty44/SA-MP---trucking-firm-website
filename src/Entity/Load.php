@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @ORM\Table(name="hw_loads")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\LoadsRepository")
  */
 class Load
 {
@@ -63,12 +63,28 @@ class Load
     private $ended;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Locations")
+     * @ORM\JoinColumn(name="locationStart", referencedColumnName="id", nullable=true)
+     */
+    private $locationStart;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Locations")
+     * @ORM\JoinColumn(name="locationEnd", referencedColumnName="id", nullable=true)
+     */
+    private $locationEnd;
+
+    /**
      * Load constructor.
      */
     public function __construct()
     {
         $this->addDate = new \DateTime();
         $this->ended = false;
+        $this->user = new ArrayCollection();
+        $this->locationEnd = null;
+        $this->locationStart = null;
+
     }
 
     /**
@@ -168,6 +184,40 @@ class Load
     {
         $this->ended = $ended;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getLocationStart()
+    {
+        return $this->locationStart;
+    }
+
+    /**
+     * @param mixed $locationStart
+     */
+    public function setLocationStart($locationStart): void
+    {
+        $this->locationStart = $locationStart;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLocationEnd()
+    {
+        return $this->locationEnd;
+    }
+
+    /**
+     * @param mixed $locationEnd
+     */
+    public function setLocationEnd($locationEnd): void
+    {
+        $this->locationEnd = $locationEnd;
+    }
+
+
 
 
 

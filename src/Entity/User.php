@@ -10,6 +10,7 @@ namespace App\Entity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -63,6 +64,20 @@ class User implements AdvancedUserInterface, \Serializable
      * @ORM\Column(type="array")
      */
     protected $roles;
+
+    /**
+     * @ORM\Column(type="string", length=64, nullable=true, options={"default" : NULL})
+     */
+    private $truck;
+
+    /**
+     * @ORM\Column(type="string", length=254, nullable=true, options={"default" : NULL})
+     */
+    private $ranking;
+    /**
+     * @ORM\Column(type="integer", options={"default" : 10})
+     */
+    private $sortOrder;
 
 
 
@@ -202,6 +217,64 @@ class User implements AdvancedUserInterface, \Serializable
     {
         $this->activationHash = $activationHash;
     }
+
+    public function __toString()
+    {
+        try {
+            return (string) $this->username;
+        } catch (Exception $exception) {
+            return '';
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTruck()
+    {
+        return $this->truck;
+    }
+
+    /**
+     * @param mixed $truck
+     */
+    public function setTruck($truck): void
+    {
+        $this->truck = $truck;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRanking()
+    {
+        return $this->ranking;
+    }
+
+    /**
+     * @param mixed $ranking
+     */
+    public function setRanking($ranking): void
+    {
+        $this->ranking = $ranking;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSortOrder()
+    {
+        return $this->sortOrder;
+    }
+
+    /**
+     * @param mixed $sortOrder
+     */
+    public function setSortOrder($sortOrder): void
+    {
+        $this->sortOrder = $sortOrder;
+    }
+
 
 
 }

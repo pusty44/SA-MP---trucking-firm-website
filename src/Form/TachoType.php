@@ -90,10 +90,12 @@ class TachoType extends AbstractType
             ->add('load', EntityType::class, [
                 'class' => Load::class,
                 'query_builder' => function (EntityRepository $er) use ($user) {
-                return $er->createQueryBuilder('l')
-                    ->where('l.user = :user')
-                    ->orderBy('l.addDate','DESC')
-                    ->setParameter(':user',$user);
+                /** @var User $user */
+                $qb = $er->createQueryBuilder('l')
+                    ->Join('l.user','u')
+                    ->where('u.username = :user')
+                    ->setParameter('user',$user);
+                return $qb;
                 },
                 'label' => 'Wybierz ładunek',
                 'required' => false,

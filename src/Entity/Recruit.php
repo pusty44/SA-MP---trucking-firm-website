@@ -41,11 +41,6 @@ class Recruit
      */
     private $forumNick;
 
-    /**
-     * @var string
-     * @ORM\Column(type="string")
-     */
-    private $steamLink;
 
     /**
      * @var string
@@ -145,21 +140,6 @@ class Recruit
         $this->forumNick = $forumNick;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getSteamLink(): ?string
-    {
-        return $this->steamLink;
-    }
-
-    /**
-     * @param string $steamLink
-     */
-    public function setSteamLink(string $steamLink): void
-    {
-        $this->steamLink = $steamLink;
-    }
 
     /**
      * @return string|null
