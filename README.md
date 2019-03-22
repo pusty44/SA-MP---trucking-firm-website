@@ -1,4 +1,10 @@
 # GTA trucking firm webiste
+# Features
+  - Tachograph
+  - License plates
+  - User trucks
+  - User loads count
+  - Loadout system connected to user profiles, trucks and trailers
 
 # Installation
 Clone repository
@@ -16,3 +22,4 @@ $ php bin/console d:s:u -f
 ```
 
 **THATS ALL FOLKS! YOU DID IT!**
+
